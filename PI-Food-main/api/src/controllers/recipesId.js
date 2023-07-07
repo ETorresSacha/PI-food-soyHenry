@@ -34,8 +34,9 @@ const recipeId = async(req,res)=>{
             include:{
                 model:Diets, 
                 attributes:["name"]}
-        })
-        console.log(response)
+            })
+            console.log(response.diets[0].dataValues.name)
+            
         return res.status(200).json(response) 
     
     } catch (error) {

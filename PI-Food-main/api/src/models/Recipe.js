@@ -9,21 +9,25 @@ module.exports = (sequelize) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
     },
+
     title: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value){
         this.setDataValue("title",value.toLowerCase())
-      }
-    },
+      }},
+
     image:{type: DataTypes.STRING,
       allowNull: false},
-    summary:{type: DataTypes.TEXT,
-      allowNull: false},
+
     healthScore:{type: DataTypes.INTEGER,
       allowNull: false},
+
+    summary:{type: DataTypes.TEXT,
+      allowNull: false},
+
     analyzedInstructions:{type:DataTypes.ARRAY(DataTypes.JSON), // OJO:Si no funciona cambiar a otro tipo de dato
-    allowNull: true}
+      allowNull: true}
   },{timestamps:false});
 };
 

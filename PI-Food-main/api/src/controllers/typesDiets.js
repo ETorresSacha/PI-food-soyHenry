@@ -9,11 +9,23 @@ const {apiKey} = process.env;
 
  //! FUNCION PARA CREAR EL ARRAY CON LOS TIPOS DE DIETAS
  const typesDietsFuntion = async()=>{
-    const tiposDieta =['vegetarian','lacto-vegetarian','ovo vegetarian','paleo','low FODMAP' ]
-    //const tiposDieta =['gluten free','ketogenic','vegetarian','lacto-vegetarian','ovo vegetarian','vegan','paleo','primal','low FODMAP','whole 30', ]
+
+    const tiposDieta =[]
     const dieta = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=100`)
     const valor =dieta.data.results
 
+    // **********************************    DIETAS SUELTAS    **********************************
+    valor.map(prop=>{
+        const arrayOfkeys = Object.keys(prop)
+        const filterDiet = arrayOfkeys.filter(typediet=>typediet==='vegetarian'||typediet==='vegan'||typediet==='gluten free'||typediet==='dairy free')
+        filterDiet.map(elemen=>{
+            if(tiposDieta.indexOf(elemen)===-1) tiposDieta.push(elemen)
+        })
+
+    })
+
+    // ****************   DIETAS QUE SE ENCUENTRAN DENTRO DEL ARRAY DE diets   ****************
+   
     //!PRIMERA FORMA
     // for(let i =0;i<valor.length;i++){
     //     const x= valor[i].diets
@@ -28,11 +40,14 @@ const {apiKey} = process.env;
     //! SEGUNDA FORMA
     //TODO--> En este caso mapeamos el array de objetos(valor), despues ingresamos a su propiedad de diets y mapeamos este array(element.diets), despues
     //TODO--> pasamos a verificar con indexOF si existe algun elemento de "element.diets" en "tiposDieta", si no existe lo agrega, de lo contrario devuelve el array inicial (tiposDieta).
+    
     valor.map(element=>{
         element.diets.map(ele=>{
             if(tiposDieta.indexOf(ele)===-1) tiposDieta.push(ele) 
         })
     }) 
+
+    // ************************    RETORNA TODO EL ARRAY DE DIETAS    ************************
     return tiposDieta.sort()
 
  }
@@ -40,30 +55,39 @@ const {apiKey} = process.env;
 
  const typeDiets = async(req,res)=>{
     try {
-        const arrayDiets = await typesDietsFuntion()
-        
+
+        const arrayDiets = await typesDietsFuntion() // llamamos a la función
+
+        // ********************   LLAMAMOS LAS DIETAS DE LA BD   ******************** 
+            let response = await Diets.findAll();
+            
+
+        // ********************   SI EXISTEN DIETAS EN LA BD   ******************** 
+            if (response.length !== 0){
+                response.map(elemen=>{
+                    if(arrayDiets.indexOf(elemen)===-1) arrayDiets.push(elemen)
+                })
+                return arrayDiets
+            }
+            
+        // ********************   SI NO EXISTEN DIETAS EN LA BD   ********************  
+  
         res.status(200).json(arrayDiets)
-        // ***** AGREGAR LOS TIPOS DE DIETAS A LA BASE DE DATOS *****
+
+        // ***************   AGREGAR LAS DIETAS A LA BASE DE DATOS   ***************
+
          arrayDiets.forEach(async(ele)=>{
             await Diets.create({
                 name:ele
-            })
-            
+            })   
         })
         
-
-
     } catch (error) {
         res.status(500).json({error:error.message})
         
     }
-
  }
 
  module.exports={typeDiets}
-
-
- //! * en em momento de agregar a la base de datos no debe de cargarse repetidos
- //! * ver si al renderizar vamos a traer de la api y la base de  datos juntos
 
  
