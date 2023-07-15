@@ -1,9 +1,20 @@
 import './App.css';
+import { Routes, Route} from 'react-router-dom';
+import LandingPage from './components/landingPage/LandingPage';
+import HomePage from './components/homePage/HomePage';
+import DetailRecipe from './components/detailPage/DetailRecipe';
+import FormPage from './components/formPage/FormPage.jsx';
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Food</h1>
+      <Routes>
+        <Route path='/' element={<LandingPage/>}></Route>
+        <Route path='/home' element={<HomePage/>}></Route>
+        <Route path='/detail/:id' element={<DetailRecipe/>}></Route>
+        <Route path='/form' element={<FormPage/>}></Route>
+        
+      </Routes>
     </div>
   );
 }

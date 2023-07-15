@@ -5,12 +5,13 @@ const {apiKey} = process.env;
  // ------------------------------------------------------------
 
  const axios = require('axios')
- const {Diets} = require('../db')
+
 
  //! FUNCION PARA CREAR EL ARRAY CON LOS TIPOS DE DIETAS
  const typesDietsFuntion = async()=>{
 
     const tiposDieta =[]
+
     const dieta = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=100`)
     const valor =dieta.data.results
 
@@ -18,6 +19,7 @@ const {apiKey} = process.env;
     valor.map(prop=>{
         const arrayOfkeys = Object.keys(prop)
         const filterDiet = arrayOfkeys.filter(typediet=>typediet==='vegetarian'||typediet==='vegan'||typediet==='gluten free'||typediet==='dairy free')
+      
         filterDiet.map(elemen=>{
             if(tiposDieta.indexOf(elemen)===-1) tiposDieta.push(elemen)
         })
@@ -52,42 +54,6 @@ const {apiKey} = process.env;
 
  }
 
-
- const typeDiets = async(req,res)=>{
-    try {
-
-        const arrayDiets = await typesDietsFuntion() // llamamos a la función
-
-        // ********************   LLAMAMOS LAS DIETAS DE LA BD   ******************** 
-            let response = await Diets.findAll();
-            
-
-        // ********************   SI EXISTEN DIETAS EN LA BD   ******************** 
-            if (response.length !== 0){
-                response.map(elemen=>{
-                    if(arrayDiets.indexOf(elemen)===-1) arrayDiets.push(elemen)
-                })
-                return arrayDiets
-            }
-            
-        // ********************   SI NO EXISTEN DIETAS EN LA BD   ********************  
-  
-        res.status(200).json(arrayDiets)
-
-        // ***************   AGREGAR LAS DIETAS A LA BASE DE DATOS   ***************
-
-         arrayDiets.forEach(async(ele)=>{
-            await Diets.create({
-                name:ele
-            })   
-        })
-        
-    } catch (error) {
-        res.status(500).json({error:error.message})
-        
-    }
- }
-
- module.exports={typeDiets}
+ module.exports={typesDietsFuntion}
 
  

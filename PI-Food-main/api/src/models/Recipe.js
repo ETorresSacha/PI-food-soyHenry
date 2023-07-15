@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         this.setDataValue("title",value.toLowerCase())
       }},
 
-    image:{type: DataTypes.STRING,
+    image:{type: DataTypes.TEXT,
       allowNull: false},
 
     healthScore:{type: DataTypes.INTEGER,
@@ -26,8 +26,9 @@ module.exports = (sequelize) => {
     summary:{type: DataTypes.TEXT,
       allowNull: false},
 
-    analyzedInstructions:{type:DataTypes.ARRAY(DataTypes.JSON), // OJO:Si no funciona cambiar a otro tipo de dato
-      allowNull: true}
+    instructions:{type: DataTypes.TEXT,
+      allowNull: false},   
+
   },{timestamps:false});
 };
 

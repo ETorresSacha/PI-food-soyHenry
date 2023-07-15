@@ -1,26 +1,21 @@
 const {Recipe} = require('../db')
 
-const crearRecipe = async(req,res)=>{
+const newData = async({id, title, image, summary, healthScore,instructions,ingredients,equipment,dietId})=>{
+//console.log(id, title, image, summary,dietId,instructions,ingredients,equipment)
+        //if(title===undefined|| image===undefined ||summary===undefined || healthScore===undefined || analyzedInstructions===undefined) return {error:'Missing data'}
 
-    const { id, title, image, summary, healthScore,analyzedInstructions,dietId} = req.body;
- 
-
-        if(title===undefined|| image===undefined ||summary===undefined || healthScore===undefined || analyzedInstructions===undefined) return res.status(404).json({error:'Missing data'})
         let newRecipe = await Recipe.create({
             id,
             title,
             image,
             healthScore,
             summary,
-            analyzedInstructions
+            instructions,
+            ingredients,
+            equipment
           });
-
-          const newRecipes = await newRecipe.setDiets(dietId)
-
-          /* let recipe = await newRecipe.setDiet(id); */
-          //console.log(newRecipe)
-
-          return res.status(200).json(newRecipes);
+          const newRecipes = await newRecipe.setDiets(dietId) //VER ESE TEMA DE ADD....
+          return newRecipes
 }
 
-module.exports = {crearRecipe}
+module.exports = {newData}
