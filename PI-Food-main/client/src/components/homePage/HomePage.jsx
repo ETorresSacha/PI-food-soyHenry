@@ -11,7 +11,7 @@ import Paginado from '../Paginado/Paginado';
 const HomePage = ()=>{
 
     const dispatch = useDispatch();
-    //!-------------------   PAGINADO   -------------------//
+    //-------------------   PAGINADO   -------------------//
 
       const recipesAll = useSelector(state => state.recipe);
       const recipeFilter = useSelector(state => state.recipeFilter);
@@ -28,17 +28,7 @@ const HomePage = ()=>{
 
 
 
-
-
-
-
-    
-        // llamanos los recipetes del estado global
-        // // const recipesAll= useSelector((state)=>state.recipe)
-        // // const recipeFilter= useSelector((state)=>state.recipeFilter)
-
-
-    //cargamos el estado con las recetas
+     //-------------------   CARGAMOS LOS ESTADOS CON LAS RECETAAS   -------------------//
     useEffect(()=>{
 
         !recipeFilter.length && dispatch(getRecipeAllName())
@@ -46,7 +36,7 @@ const HomePage = ()=>{
     },[dispatch])
 
 
-                //!-------------------   FILTROS   -------------------//
+                //-------------------   FILTROS   -------------------//
         //-------------------   ID   -------------------//
     const handleOrder=(event)=>{
         dispatch(upwardOrfalling(event.target.value))
@@ -157,4 +147,3 @@ const HomePage = ()=>{
 
 export default HomePage
 
-//!FALTA ORDENAR ESTA PARTE, TODO

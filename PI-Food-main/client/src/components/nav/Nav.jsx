@@ -8,8 +8,9 @@ function Nav() {
   const navigate = useNavigate()
   return (
     <div id='conteiner-nav'>
+        <button className='input-nav' onClick={()=>navigate(`/`)}>EXIT</button>
         <Search/>
-        <button id='input-nav' onClick={()=>navigate(`/form`)}>NEW RECIPE</button>
+        <button className='input-nav' onClick={()=>navigate(`/form`)}>NEW RECIPE</button>
     </div>
   )
 }

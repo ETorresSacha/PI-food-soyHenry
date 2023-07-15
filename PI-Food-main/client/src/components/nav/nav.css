@@ -1,25 +1,38 @@
 #conteiner-nav{
     display: flex;
     justify-content: center;
-    margin: 10px 10px 50px;
-    padding: 20px;
-    border: solid;
-    gap:5rem;
+    margin: 20px 10px 50px;
+    padding: 15px;
+    border:solid;
+    align-items: center;
+    gap:20rem;
 }
-#input-nav{
-    width: 180px;
+.input-nav{
+    width: 150px;
     height: 30px;
     border-radius:8px;
     color: #ffffff;
-  
+    text-align: center;
+    color: #060606;
     background: transparent;
     text-align: center;
-   
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.99);
     backdrop-filter: blur(15px);
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
-    border: solid grey;
+    border: solid gray;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.91);
+
+}
+
+.input-nav:hover{
+    background: #100f0fa8;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.99);
+    color: white;
+    transform: scale(1.1);
+    border: solid rgba(255, 254, 254, 0.807);
+    box-shadow: 0px 0px 0px 0px rgba(247, 245, 245, 0.91);
 
 }
 
@@ -28,30 +41,43 @@
 /* CSS SEARCH */
 
 .search-conteiner{
-    gap: 2rem;
+   
+    
+    display: flex;
+    justify-content: center;
+    border-radius: 15px 15px 15px 15px;
+    background:rgba(255, 255, 255, 0.656);
+    border: solid rgb(255, 255, 255);
+
+}
+
+.search-conteiner:hover{
+    background: #bdc1c271;
 
 }
 .buscarInput{
-    height: 25px;
-    width: 200px;
+    height: 35px;
+    width: 250px;
     font-weight:bold;
     border: 0;
     border-radius: 15px 0 0 15px;
     text-align: center;
-    background: #e0e0e0;
+    background: transparent;
     justify-content: left; 
+   
 }
 
 .buscarClick{
-    height: 25px;
+    height: 30px;
     font-weight:bold;
     border: 0;
     border-radius: 0 15px 15px 0;
     cursor: pointer;
-    background: #a2c11c;
+    background:transparent;
     margin-bottom: -20rem; 
     justify-content: center;
     align-items: center;
+    
  
 
 }

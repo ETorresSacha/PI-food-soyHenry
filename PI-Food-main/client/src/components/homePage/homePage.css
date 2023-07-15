@@ -59,6 +59,7 @@
     text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.99);
     color: white;
     transform: scale(1.1);
+    border: solid rgba(255, 254, 254, 0.807);
 
 }
 
@@ -79,16 +80,18 @@
     display: inline-flex;
     flex-direction: column;
  
-    width: 230px;
-    height: 450px;
-    border-radius: 8px;
+    width: 250px;
+    height: 470px;
+    border-radius: 10px;
     overflow: hidden;
     margin: 50px 10px 50px;
     
     flex-wrap: nowrap;
     transition: 0.3s;
     box-shadow: 5px 5px 15px 5px #989292cf;
-    background: #dbdce6;
+    /* background: #dbe4e6ab; */
+     background: url('../../image/fondo-card.jpg'); 
+    
 
  
    
@@ -119,6 +122,7 @@
     transition: 0.3s;
     border-radius: 50px;
     margin: 10px 10px 10px;
+  
 
 }
 
