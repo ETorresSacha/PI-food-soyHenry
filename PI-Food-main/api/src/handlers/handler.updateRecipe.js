@@ -2,7 +2,6 @@ const { updataRecipeData } = require("../controllers/updateRecipe")
 
 const updateRecipe =async(req,res)=>{
     const {id} = req.params
-    
 
    try {
             const data = await updataRecipeData(id)
@@ -12,9 +11,8 @@ const updateRecipe =async(req,res)=>{
             
         
      } catch (error) {
-         return res.status(404).json({error:"No se encontró la receta con este Id, intento con otro."})
+         return res.status(404).json({error:"The recipe with this Id was not found, try another one."})
      }
 }
 
 module.exports ={updateRecipe}
-//! falta modificar las dietas, estandarizar los errores y la respuesta 200

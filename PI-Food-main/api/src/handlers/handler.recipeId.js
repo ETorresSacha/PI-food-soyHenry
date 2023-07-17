@@ -15,7 +15,7 @@ const recipeId = async(req,res)=>{
         return res.status(200).json(recipe) 
     }
     catch (error) {
-        return res.status(404).json({error:"The recipe with that ID was not found"});
+        return res.status(404).json({error:"The recipe with that ID was not found."});
     }
 }
 

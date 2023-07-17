@@ -73,7 +73,6 @@ const { Op } = require("sequelize");
         // ********************     API     ********************
         
     let dataApi=responseApi.map(ele=>{   
-        console.log(ele.analyzedInstructions[0]?.steps.map(ele =>ele.ingredients.map(ele=>ele).map(ele=>ele.name)[0]))
         let datosIngredientes=[]
         let datosequipment=[]
         const retornarData ={

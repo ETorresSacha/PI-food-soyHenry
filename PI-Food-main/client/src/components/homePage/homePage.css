@@ -113,6 +113,8 @@
 }
 
 #image-card{
+    width: 250px;
+    height: 450px;
     height: 40%;
     transition: 0.3s;
     border-radius: 50px;

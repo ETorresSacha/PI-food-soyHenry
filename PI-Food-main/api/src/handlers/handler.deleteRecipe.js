@@ -4,10 +4,10 @@ const deleteRecipe =async(req,res)=>{
     const {id} = req.params
     try {
         await deleteData(id)
-        return res.status(200).json({message:"La receta se elimininó correctamente.",data:id})
+        return res.status(200).json({message:"The recipe was successfully deleted.",data:id})
         
     } catch (error) {
-        return res.status(404).json({error:"No se encontró la receta con este Id."})
+        return res.status(404).json({error:"No recipe found with this ID."})
     }
 }
 

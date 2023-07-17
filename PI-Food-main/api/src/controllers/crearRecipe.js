@@ -1,8 +1,8 @@
 const {Recipe} = require('../db')
 
 const newData = async({id, title, image, summary, healthScore,instructions,ingredients,equipment,dietId})=>{
-//console.log(id, title, image, summary,dietId,instructions,ingredients,equipment)
-        //if(title===undefined|| image===undefined ||summary===undefined || healthScore===undefined || analyzedInstructions===undefined) return {error:'Missing data'}
+
+        if(title===undefined|| image===undefined ||summary===undefined || healthScore===undefined || instructions===undefined) return {error:'Missing data'}
 
         let newRecipe = await Recipe.create({
             id,
@@ -11,11 +11,10 @@ const newData = async({id, title, image, summary, healthScore,instructions,ingre
             healthScore,
             summary,
             instructions,
-            ingredients,
-            equipment
           });
-          const newRecipes = await newRecipe.setDiets(dietId) //VER ESE TEMA DE ADD....
-          return newRecipes
+          await newRecipe.setDiets(dietId) //VER ESE TEMA DE ADD....
+    
+          return newRecipe
 }
 
 module.exports = {newData}

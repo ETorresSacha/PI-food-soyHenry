@@ -26,7 +26,7 @@ const DetailRecipe =()=>{
     return(
 
             <div  className="conteiner-detailRecipe">
-                <section className="section1">
+                <section className="section1-detail">
                     <img id="logo" src={logo} alt="logo"/>
 
                     <h1 id="title-detail">{detailRecipe?.title}</h1>
@@ -35,8 +35,8 @@ const DetailRecipe =()=>{
                     </button>
                 </section>
 
-                <section className="section2">
-                    <section id="sectionA">
+                <section className="section2-detail">
+                    <section id="sectionA-detail">
                         <img id="img-detail" src={detailRecipe?.image} alt={detailRecipe?.nombre}/>
                         <div className="score-diets">
                             <div id="score">
@@ -50,7 +50,7 @@ const DetailRecipe =()=>{
                         </div>
                     </section>
 
-                    <section id="sectionB">
+                    <section id="sectionB-detail">
                         <div id="summary">
                             <h3 className="title">SUMMARY</h3>
                             <h2 className="text">{detailRecipe.summary}</h2>
