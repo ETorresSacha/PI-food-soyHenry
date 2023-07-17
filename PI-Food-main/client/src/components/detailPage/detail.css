@@ -1,4 +1,190 @@
-#equip{
-border:1px solid black;
+.conteiner-detailRecipe{
+    margin: 0px;
+    background: url('../../image/pngtree-simple-food-detail.jpg') no-repeat; 
+    background-size: cover;
+    display: flex;
+    justify-content:space-evenly;
+    height: 100vh;
+    flex-wrap: wrap;
 
+}
+
+.section1{
+    width: 1500px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    /* justify-content: space-between; */
+
+}
+
+.section2{
+    width: 1500px;
+    display: flex;
+    justify-content:center;
+    gap: 100px;
+    align-items: center;   
+    /* justify-content: space-between; */
+}
+
+/*-------------SECTION 1------------*/
+#logo{
+    height:80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+#title-detail{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    color:chocolate;
+    -webkit-text-stroke: 0.5px rgb(255, 255, 255);
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.581);
+    font-size: 40px;
+}
+
+.btn-home-detail{
+    width: 70px;
+    height: 70px;
+    border-radius:20px;
+    color: #060606;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  
+ 
+}
+.btn-home-detail:hover{
+    background: #ffffffa8;
+    transform: scale(1.1);
+    border: solid rgba(255, 254, 254, 0.807);
+    box-shadow: 0 0 10px #2a2c2c9b, 0 0 10px #2a2c2c9b, 0 0 10px #2a2c2c9b;
+}
+
+/*-------------SECTION 2------------*/
+#sectionA{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#sectionB{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+/*-------------SECTION A------------*/
+#img-detail{
+    position: relative;
+    top: -20px;
+    height:auto;
+    width: auto;
+    max-width: 300px;
+    min-height: 300px;
+    transition: 0.3s;
+    border-radius: 50%;
+    margin: 30px;
+    border: solid grey;
+}
+.score-diets{
+    height: 200px;
+    width: 400px;
+    position: relative;
+    top: -50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#score{
+    height: 160px;
+    backdrop-filter: blur(15px);
+    font-size: 15px;
+    justify-items: center;
+    background: transparent;
+    border-radius: 30px;
+    font-family: cursive;
+    border: solid;
+    display: flex;
+    flex-direction: column; 
+}
+
+#score-number{
+    position: relative;
+    top: -30px;
+    font-size: 35px;
+    font-style: oblique;
+    font-weight: bolder;
+    text-shadow: 5px 4px 4px rgba(0, 0, 0, 0.581);
+    -webkit-text-stroke: 0.5px rgb(255, 255, 255);
+  
+}
+#type-diets{
+    height: 150px;
+    width: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background: transparent;
+    border-radius: 30px;
+    font-family: cursive;
+    border: solid;
+    backdrop-filter: blur(15px);
+}
+
+#diets{
+    position: relative;
+    top: -30px;
+}
+
+/*-------------SECTION B------------*/
+#summary{
+    position: relative;
+    top: -50px;
+    width: 700px;
+    height: 400px;
+}
+#instruction{
+    position: relative;
+    top: -190px;
+    width: 700px;
+    height: 40px;
+}
+.title{
+    font-family:fantasy;
+    font-size: 18px;
+    color: darkred;
+ 
+ }
+.text{
+    position: relative;
+    top: -40px;
+    width: 700px;
+    height: auto;
+    font-size: 12px;
+    text-align: justify;
+    background: transparent;
+    backdrop-filter: blur(15px); /* esto hace borrozo la imagen*/
+    border: solid grey;
+    line-height: 1.1;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 50px;
+    font-family: cursive; 
+}
+
+#title-summary{
+    font-family:fantasy;
+    font-size: 18px;
+    color: darkred;
 }

@@ -8,19 +8,22 @@ const HomeCard = ({recipesAll})=>{
             <div className="conteiner-car">
                 {recipesAll.map(({id,title,image,diets,instructions})=>{
                     return(
-                        <div key={id} className='cards'>
-                            <h2 id='title-card'>{title}</h2>
-                            <img  id='image-card' onClick={()=>navigate(`/detail/${id}`)} src={image} alt={title} />
-                      
-                            <h3 id='diet-title-card'>Tipos deDietas</h3>
-                            <h4 id='diet-card' >{diets?.map((ele,index)=>(
-                                                <div key={index}>
-                                                    <li>{ele}</li>
-                                                </div>)
-                                        )}
-                            </h4>
+                        <div className='cards'>
+                            <div key={id} className='car-detail'>
+                                <h2 id='title-card'>{title}</h2>
+                                <img  id='image-card' onClick={()=>navigate(`/detail/${id}`)} src={image} alt={title} />
+                        
+                                <h3 id='diet-title-card'>Tipos deDietas</h3>
+                                <h4 id='diet-card' >{diets?.map((ele,index)=>(
+                                                    <div key={index}>
+                                                        <li>{ele}</li>
+                                                    </div>)
+                                            )}
+                                </h4>
 
+                            </div>
                         </div>
+                        
                     )})}
             </div>
     )
