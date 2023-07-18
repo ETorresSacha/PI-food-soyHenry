@@ -49,7 +49,7 @@ const byForId =async(id)=>{
                 title: responseApi?.title,
                 image: responseApi?.image,
                 healthScore:responseApi?.healthScore,
-                summary:responseApi?.summary,
+                summary:responseApi?.summary.replace(/<[^>]+>/g, ''),
                 instructions: responseApi.analyzedInstructions[0]?.steps.map(ele=>ele).map(ele=>ele.step),
 
                 ingredients:responseApi.analyzedInstructions[0]?.steps.map(ele=>ele).map(ele=>ele.ingredients.map(ele=>{

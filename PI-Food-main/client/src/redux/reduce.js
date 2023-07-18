@@ -1,8 +1,9 @@
-import {GET_RECIPE_ALL_NAME, RECIPE_ID, RESET_RECIPE_ID,ADD_TYPE_DIET,CREATE_RECIPE,UPWARD_OR_FALLING,UPWARD_OR_FALLING_TITLE,FILTER_FOR_STORAGE,RESET, FILTER_FOR_DIET,FILTER_HEALTH_SCORE,PAGINATED_ALL} from './action'
+import {GET_RECIPE_ALL, GET_RECIPE_NAME,RECIPE_ID, RESET_RECIPE_ID,ADD_TYPE_DIET,CREATE_RECIPE,UPWARD_OR_FALLING,UPWARD_OR_FALLING_TITLE,FILTER_FOR_STORAGE,RESET, FILTER_FOR_DIET,FILTER_HEALTH_SCORE,PAGINATED_ALL} from './action'
 import  { sumaUnicode } from './fun-sum-unicode'// Función para calcular el valor numerico del Id de los datos de la BD
 
 const initialState={
     recipe:[],
+    recipeName:[],
     recipeFilter:[],
     recipeFilterAll:[],
     recipeFilterDiets:[],
@@ -11,7 +12,7 @@ const initialState={
     typesDiets:[],
     createRecipe:[],
     paginaActual:1,
-    recipeForPage:2,//cantidad de cards por pagina(puede cambiar)
+    recipeForPage:10,//cantidad de cards por pagina(puede cambiar)
     reset:[]
 
 }
@@ -20,7 +21,7 @@ const reducer=(state=initialState,action)=>{
     switch (action.type){
 
         //-------------------   TODO Y NOMBRE   -------------------//
-        case GET_RECIPE_ALL_NAME:
+        case GET_RECIPE_ALL:
             return {...state,
                 recipe:action.payload,
                 recipeFilter:action.payload,
@@ -28,6 +29,15 @@ const reducer=(state=initialState,action)=>{
                 recipeFilterDiets:action.payload,
                 recipeFilterHealthScore:action.payload,
                 reset:action.payload
+                }
+
+        case GET_RECIPE_NAME:
+            return {...state,
+                recipeName:action.payload,
+                recipeFilter:action.payload,
+                recipeFilterAll:action.payload,
+                recipeFilterDiets:action.payload,
+                recipeFilterHealthScore:action.payload,
                 }
 
         //-------------------   RECETA POR ID (DETAIL)   -------------------// 
@@ -69,7 +79,8 @@ const reducer=(state=initialState,action)=>{
                         const ordenMenorMayor = numberId.sort((a,b)=>a.id-b.id)
                     return {...state,
                             recipe:[...ordenBD,...ordenMenorMayor],
-                            recipeFilter:[...ordenBD,...ordenMenorMayor]
+                            recipeFilter:[...ordenBD,...ordenMenorMayor],
+                            recipeName:[...ordenBD,...ordenMenorMayor],
                         }
                     }
 
@@ -80,7 +91,8 @@ const reducer=(state=initialState,action)=>{
                         const ordenMayorMenor = numberId.sort((a,b)=>b.id-a.id)
                     return {...state,
                             recipe:[...ordenMayorMenor,...ordenBD],
-                            recipeFilter:[...ordenMayorMenor,...ordenBD]
+                            recipeFilter:[...ordenMayorMenor,...ordenBD],
+                            recipeName:[...ordenMayorMenor,...ordenBD]
                         }
                     }
                 else return
@@ -96,6 +108,8 @@ const reducer=(state=initialState,action)=>{
                     return {...state,
                             recipe:[...filterNameA],
                             recipeFilter:[...filterNameA],
+                            recipeName:[...filterNameA]
+                        
                         }
                     }
 
@@ -104,6 +118,7 @@ const reducer=(state=initialState,action)=>{
                     return {...state,
                             recipe:[...filterNameD],
                             recipeFilter:[...filterNameD],
+                            recipeName:[...filterNameD]
                         }
                     }
                 else return
@@ -117,15 +132,17 @@ const reducer=(state=initialState,action)=>{
                 if(action.payload==="API"){
                     return {...state,
                             recipe:[...api],
-                            recipeFilter:[...api],
-                            recipeFilterDiets:[...api]
+                             recipeFilter:[...api],
+                            recipeFilterDiets:[...api],
+                            recipeName:[...api]
                         }
                     }
                 else if (action.payload==="BASE DE DATOS"){
                     return {...state,
                             recipe:[...baseDatos],
                             recipeFilter:[...baseDatos],
-                            recipeFilterDiets:[...baseDatos]
+                            recipeFilterDiets:[...baseDatos],
+                            recipeName:[...baseDatos]
                         }
                     }
                 else return
@@ -134,16 +151,12 @@ const reducer=(state=initialState,action)=>{
         //-------------------   TIPO DE DIETA   -------------------//      
         case FILTER_FOR_DIET:{
 
-                    let recipeForDiet=[]
+                let recipeForDiet=state.recipeFilterDiets.filter(element=>element.diets.includes(action.payload))
 
-                    state.recipeFilterDiets.map(element=>{
-                if(element.diets.includes(action.payload)) recipeForDiet.push(element)})
-
-                if(action.payload ==="diets") return
-                    
                     return {...state,
                             recipe:[...recipeForDiet],
-                            recipeFilter:[...recipeForDiet]
+                            recipeFilter:[...recipeForDiet],
+                            recipeName:[...recipeForDiet]
                         }        
                 }
         //-------------------   HEALTH SCORE   -------------------//
@@ -160,6 +173,8 @@ const reducer=(state=initialState,action)=>{
                     return {...state,
                             recipe:[...healthScoreAsc],
                             recipeFilter:[...healthScoreAsc],
+                            recipeName:[...healthScoreAsc]
+
                         }
                     }
     
@@ -168,6 +183,7 @@ const reducer=(state=initialState,action)=>{
                     return {...state,
                             recipe:[...healthScoreDesc],
                             recipeFilter:[...healthScoreDesc],
+                            recipeName:[...healthScoreDesc]
                         }
                     }
                  else return
@@ -186,7 +202,10 @@ const reducer=(state=initialState,action)=>{
                     recipe:[...state.reset],
                     recipeFilter:[...state.reset],
                     recipeFilterDiets:[...state.reset],
-                    recipeFilterHealthScore:[...state.reset]
+                    recipeFilterHealthScore:[...state.reset],
+                    recipeName:[...state.reset],
+              
+
                 }
 
         default:

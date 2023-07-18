@@ -20,21 +20,15 @@
 }
 
 .conteiner-paginado{
-    display: flex;
-    gap: 55px;
-    align-items: center;
-    justify-content:center;
-    position: absolute;
-    margin: 870px 600px;
-    color: rgba(0, 0, 0, 0.695);
-}
-.conteiner-btn-page{
-    height: 30px;
-    width: 200px;
-    color: rgba(0, 0, 0, 0.695);
 
-    justify-content:center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 25px;
 }
+
 
 .btn-page{
     text-align: center;

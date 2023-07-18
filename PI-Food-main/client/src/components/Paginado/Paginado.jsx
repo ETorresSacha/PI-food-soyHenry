@@ -10,9 +10,9 @@ function Paginado() {
     const dispatch=useDispatch()
     const pagina = useSelector(state=>state.paginaActual)
     const cardPagina = useSelector(state=>state.recipeForPage)
-    const recipeAll= useSelector(state=>state.recipe)
+    const recipeFilter= useSelector(state=>state.recipeFilter)
 
-    const totalPaginas=Math.ceil(recipeAll.length/cardPagina)
+    const totalPaginas=Math.ceil(recipeFilter.length/cardPagina)
 
     const handelPage=(page)=>{
         dispatch(paginatedAll(page))

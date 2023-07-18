@@ -6,10 +6,10 @@ const HomeCard = ({recipesAll})=>{
 
     return(
             <div className="conteiner-car">
-                {recipesAll.map(({id,title,image,diets,instructions})=>{
+                {recipesAll.map(({id,title,image,diets})=>{
                     return(
-                        <div className='cards'>
-                            <div key={id} className='car-detail'>
+                        <div key={id} className='cards'>
+                            <div  className='car-detail'>
                                 <h2 id='title-card'>{title}</h2>
                                 <img  id='image-card' onClick={()=>navigate(`/detail/${id}`)} src={image} alt={title} />
                         

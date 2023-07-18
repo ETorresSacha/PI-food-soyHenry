@@ -2,7 +2,7 @@ import './homePage.css'
 
 import { useEffect } from "react"
 import { useDispatch,useSelector } from "react-redux";
-import { addTypeRecipe, filterForStorage, getRecipeAllName, reset, upwardOrfalling,upwardOrfallingTitle,filterForDiets, filterHealthScore} from "../../redux/action";
+import { addTypeRecipe, filterForStorage, getRecipeAll, reset, upwardOrfalling,upwardOrfallingTitle,filterForDiets, filterHealthScore} from "../../redux/action";
 import HomeCard from './HomeCard';
 import Nav from '../nav/Nav';
 import Paginado from '../Paginado/Paginado';
@@ -23,7 +23,7 @@ const HomePage = ()=>{
 
       const final = inicio + recipeForPage;
 
-      const cards = recipesAll.slice(inicio, final);
+      const cards = recipeFilter.slice(inicio, final);
 
 
 
@@ -31,7 +31,7 @@ const HomePage = ()=>{
      //-------------------   CARGAMOS LOS ESTADOS CON LAS RECETAAS   -------------------//
     useEffect(()=>{
 
-        !recipeFilter.length && dispatch(getRecipeAllName())
+        !recipeFilter.length && dispatch(getRecipeAll())
         recipeFilter.length !== recipesAll.length && dispatch(filterForStorage())
     },[dispatch])
 
@@ -77,7 +77,7 @@ const HomePage = ()=>{
 
     //-------------------   RESET   -------------------// 
     const resetAllRecipe =()=>{
-        dispatch(reset())
+        dispatch(getRecipeAll())
 
     }
 

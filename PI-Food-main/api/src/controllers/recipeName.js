@@ -22,7 +22,7 @@ const { Op } = require("sequelize");
         const minusculaname= name.toLowerCase()
 
         // ********************     API     ********************
-            responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${minusculaname}&number=2&addRecipeInformation=true`);
+            responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${minusculaname}&number=100&addRecipeInformation=true`);
             responseApi = responseApi.data.results;
 
         // ********************     BD     ********************
@@ -39,8 +39,9 @@ const { Op } = require("sequelize");
 
     else{
         // ********************     API     ********************
-            responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=2&addRecipeInformation=true`);
-            responseApi= responseApi.data.results
+            responseApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=100&addRecipeInformation=true`);
+            
+            responseApi= await responseApi.data.results
 
 
         // ********************     BD     ********************
@@ -82,16 +83,17 @@ const { Op } = require("sequelize");
             healthScore:ele?.healthScore,
             summary:ele?.summary,
             instructions:ele.analyzedInstructions[0]?.steps.map(step =>step.step),
-
             ingredients:ele.analyzedInstructions[0]?.steps.map(ele =>ele.ingredients.map(ele=>ele).map(ele=>{
                 if(datosIngredientes.indexOf(ele.name)===-1) datosIngredientes.push(ele.name)
                 return datosIngredientes
-            }))[0][0],
+            })),
 
             equipment:(ele.analyzedInstructions[0]?.steps.map(ele =>ele.equipment).filter(ele=>ele.length!==0).map(ele=>ele.map(ele=>{
                 if(datosequipment.indexOf(ele.name)===-1) datosequipment.push(ele.name)
                 return datosequipment
-            }))[0][0]),
+            }))),
+
+
             
             diets:ele?.diets,
         }

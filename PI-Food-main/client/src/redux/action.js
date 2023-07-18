@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 
-export const GET_RECIPE_ALL_NAME ="GET_RECIPE_ALL_NAME"
+export const GET_RECIPE_ALL ="GET_RECIPE_ALL"
+export const GET_RECIPE_NAME ="GET_RECIPE_NAME"
 export const ADD_RECIPE = "ADD_RECIPE"
 export const RECIPE_ID = "RECIPE_ID"
 export const RESET_RECIPE_ID = "RESET_RECIPE_ID"
@@ -18,17 +19,14 @@ export const PAGINATED_ALL="PAGINATED_ALL"
 const URL = 'http://localhost:3001/recipe' 
 
 //-------------------   TODO Y NOMBRE   -------------------//
-export const getRecipeAllName =(name)=>{
+export const getRecipeAll =()=>{
     
     return async function(dispatch){
-        let response
+ 
         try {
-            if(name){
-                response = await axios.get(`http://localhost:3001/recipe?name=${name}`)
-            }
-            else{response = await axios.get(`${URL}`)}
-
-            return dispatch({type:GET_RECIPE_ALL_NAME,payload:response.data})
+            
+           const response = await axios.get(`${URL}`)
+            return dispatch({type:GET_RECIPE_ALL,payload:response.data})
 
         } catch (error) {
             return {erro:error.message}  
@@ -36,6 +34,25 @@ export const getRecipeAllName =(name)=>{
     }
     
 }
+
+export const getRecipeAllName =(name)=>{
+    
+    return async function(dispatch){
+
+        try {
+
+            const {data} = await axios.get(`http://localhost:3001/recipe?name=${name}`)
+            return dispatch({type:GET_RECIPE_NAME,payload:data})
+
+        } catch (error) {
+            return {erro:error.message}  
+        }
+    }
+    
+}
+
+
+
 
 //-------------------   RECETA POR ID (DETAIL)   -------------------// 
 export const recipeId =(id)=>{

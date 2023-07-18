@@ -6,9 +6,11 @@ const LandingPage = ()=>{
 
     return(
         <div className='conteiner-landing'>
+            <video  className='video'autoPlay loop muted>
+                <source src={video} type="video/mp4" />
+            </video>
+
             <div className='absolute'>
-            
-         
                 <button id="btn-home" onClick={()=>navigate(`/home`)}>HOME</button>
             </div>
             
