@@ -6,7 +6,7 @@ const HomeCard = ({recipesAll})=>{
 
     return(
             <div className="conteiner-car">
-                {recipesAll.map(({id,title,image,diets})=>{
+                {recipesAll.map(({id,title,image,diets,healthScore})=>{
                     return(
                         <div key={id} className='cards'>
                             <div  className='car-detail'>
@@ -20,6 +20,9 @@ const HomeCard = ({recipesAll})=>{
                                                     </div>)
                                             )}
                                 </h4>
+
+                
+                                <h3>{healthScore}</h3>
 
                             </div>
                         </div>

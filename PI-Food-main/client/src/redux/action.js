@@ -15,6 +15,7 @@ export const FILTER_FOR_DIET="FILTER_FOR_DIET"
 export const FILTER_HEALTH_SCORE="FILTER_HEALTH_SCORE"
 export const RESET="RESET"
 export const PAGINATED_ALL="PAGINATED_ALL"
+export const LOADING_PAGE="LOADING_PAGE"
 
 const URL = 'http://localhost:3001/recipe' 
 
@@ -24,12 +25,12 @@ export const getRecipeAll =()=>{
     return async function(dispatch){
  
         try {
-            
+            dispatch(loadingPage(true))
            const response = await axios.get(`${URL}`)
             return dispatch({type:GET_RECIPE_ALL,payload:response.data})
 
         } catch (error) {
-            return {erro:error.message}  
+              
         }
     }
     
@@ -38,27 +39,27 @@ export const getRecipeAll =()=>{
 export const getRecipeAllName =(name)=>{
     
     return async function(dispatch){
-
+        
         try {
-
-            const {data} = await axios.get(`http://localhost:3001/recipe?name=${name}`)
+            dispatch(loadingPage(true))
+             const {data} = await axios.get(`http://localhost:3001/recipe?name=${name}`)
+    
             return dispatch({type:GET_RECIPE_NAME,payload:data})
 
-        } catch (error) {
-            return {erro:error.message}  
-        }
+         } catch (error) {
+            return {erro:error.message}
+    
+         }
     }
     
 }
-
-
-
-
 //-------------------   RECETA POR ID (DETAIL)   -------------------// 
 export const recipeId =(id)=>{
 
     return async function(dispatch){
         try {
+    
+            dispatch(loadingPage(true))
             let response = await axios.get(`http://localhost:3001/recipe/${id}`) 
                 
             return dispatch({type:RECIPE_ID,payload:response.data})
@@ -139,17 +140,13 @@ export const filterHealthScore =(HealthScore)=>{
 
 }
 
+//!-------------------    -------------------//
 
-//-------------------   PAGINATED   -------------------//
-export const paginatedAll =(page)=>{
+//-------------------   LOADING   -------------------//
+export const loadingPage =(stateLoading)=>{
 
-    return {type:PAGINATED_ALL,payload:page}
+    return {type:LOADING_PAGE,payload:stateLoading}
 
 }
        
-//-------------------   RESET   -------------------// 
-export const reset =()=>{
-    
-    return {type:RESET}
-}
      

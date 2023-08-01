@@ -1,12 +1,30 @@
 .conteiner-homePage{
     display: flex;
    flex-direction: column;
-   background: url('../../image/vista-elevada-verduras.avif') no-repeat;
-   background-size: cover;
+   /* background: url('../../image/vista-elevada-verduras.avif') no-repeat; */
+   /* background-size: cover; */
+   width: 1500px;
+   /* position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1; */
 
 
 
 }
+.conteiner-homePage::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../image/vista-elevada-verduras.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* filter: blur(5px) brightness(0.2); */
+    z-index: -1;
+  }
 
 #section-home{
     display: flex;

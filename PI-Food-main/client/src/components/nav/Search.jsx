@@ -2,27 +2,27 @@ import {useState } from "react"
 import { useDispatch } from "react-redux"
 import { getRecipeAllName } from "../../redux/action"
 
-const Search = ()=>{
+const Search = ({setPage,setIndex})=>{
 
     //-------capturamos el valor del input
     const [name,setName] = useState('')
     const dispatch = useDispatch()
 
     const handleChange =(event)=>{
-       setName(event.target.value)
-
-       
+       setName(event.target.value)   
     }
 
     //------buscamos por el nombre
     const onSearch=(name)=> {
+        if(!name) return alert("Debe de ingresar una descripción")
         dispatch(getRecipeAllName(name))
+        
+        // cuando buscamos por nombre seteamos el page y el index con los respectivos valores
+        setPage(1) // cuando seteamos "page" es para renderizar las recetas encontradas desde la pagina 1
+        setIndex(0) // caundo seteamos el "index" a  cero hacemos que el slice de los botones que se encuentra dentro del componente "paginado" tome como  valor inicial cero y el final de acuerdo a la funcion configurado
+
         setName("")
     }
-
-    
-
-
 
     return(
         <div className="search-conteiner">

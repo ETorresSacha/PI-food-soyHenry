@@ -1,35 +1,49 @@
 import './homePage.css'
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch,useSelector } from "react-redux";
-import { addTypeRecipe, filterForStorage, getRecipeAll, reset, upwardOrfalling,upwardOrfallingTitle,filterForDiets, filterHealthScore} from "../../redux/action";
+import { addTypeRecipe, filterForStorage, getRecipeAll, upwardOrfalling,upwardOrfallingTitle,filterForDiets, filterHealthScore} from "../../redux/action";
 import HomeCard from './HomeCard';
 import Nav from '../nav/Nav';
 import Paginado from '../Paginado/Paginado';
+import Loading from '../loading/Loading';
 
 
 const HomePage = ()=>{
 
     const dispatch = useDispatch();
-    //-------------------   PAGINADO   -------------------//
-
-      const recipesAll = useSelector(state => state.recipe);
-      const recipeFilter = useSelector(state => state.recipeFilter);
-
-      const  paginaActual= useSelector(state => state.paginaActual);
-      const recipeForPage = useSelector(state => state.recipeForPage);
-
-      const inicio = (paginaActual - 1) * recipeForPage;
-
-      const final = inicio + recipeForPage;
-
-      const cards = recipeFilter.slice(inicio, final);
+     //-------------------   LOADING   -------------------//
+     const loading=useSelector(state=>state.loading)
+    //-------------------             -------------------//
 
 
+     const recipesAll = useSelector(state => state.recipe);
+     const recipeFilter = useSelector(state => state.recipeFilter);
+     const numberOfRecets=recipeFilter.length
+     console.log(numberOfRecets)
+
+
+     //-------------------   PAGINADO   -------------------//
+
+    const [index,setIndex]=useState(0) // se crea este estado dentro de "HomePage" con la finalidad de pasarlo por props al componente "Nav" y utilizarlo, pero el uso principal de este hook es en el componente "Paginado"
+    
+    const [recipeForPage,setRecipeForPage] = useState(10)
+    const [page,setPage] = useState(1) 
+  
+    const inicio = (page - 1) * recipeForPage;
+  
+    const final = inicio + recipeForPage;
+  
+    const cards = recipeFilter.slice(inicio, final);
+
+    //-------------------             -------------------//
+        
 
 
      //-------------------   CARGAMOS LOS ESTADOS CON LAS RECETAAS   -------------------//
     useEffect(()=>{
+       // loading && dispatch(loadingPage(true))
+
 
         !recipeFilter.length && dispatch(getRecipeAll())
         recipeFilter.length !== recipesAll.length && dispatch(filterForStorage())
@@ -57,6 +71,7 @@ const HomePage = ()=>{
     //-------------------   TIPO DE DIETA   -------------------//
         //.......cargamos y traemos las dietas
         useEffect(()=>{
+
             dispatch(addTypeRecipe())
         },[dispatch])
         
@@ -80,12 +95,17 @@ const HomePage = ()=>{
         dispatch(getRecipeAll())
 
     }
+    
 
 
     return(
         <div className="conteiner-homePage">
+            {loading && <Loading/>}
             <div>
-                <Nav/>
+                <Nav
+                    setPage={setPage}
+                    setIndex={setIndex}
+                />
             </div>
             
             <section id='section-home'>
@@ -133,14 +153,21 @@ const HomePage = ()=>{
 
                 <div>
                     <button className='input' onClick={resetAllRecipe}>Reset</button>
-                    {/* <input type="reset" value="Restaurar"></input> */}
                 </div>
             </section>
 
             <div className="recipe">
-                <HomeCard recipesAll={cards}/>
+                {!loading && <HomeCard recipesAll={cards}/>}
+                
             </div>
-            <Paginado/>
+            <Paginado
+                numberOfRecets={numberOfRecets}
+                page={page}
+                recipeForPage={recipeForPage}
+                setPage={setPage}
+                index={index}
+                setIndex={setIndex}
+            />
         </div>
     )
 }

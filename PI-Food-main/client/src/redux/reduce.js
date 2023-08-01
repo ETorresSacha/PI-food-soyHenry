@@ -1,4 +1,4 @@
-import {GET_RECIPE_ALL, GET_RECIPE_NAME,RECIPE_ID, RESET_RECIPE_ID,ADD_TYPE_DIET,CREATE_RECIPE,UPWARD_OR_FALLING,UPWARD_OR_FALLING_TITLE,FILTER_FOR_STORAGE,RESET, FILTER_FOR_DIET,FILTER_HEALTH_SCORE,PAGINATED_ALL} from './action'
+import {GET_RECIPE_ALL, GET_RECIPE_NAME,RECIPE_ID, RESET_RECIPE_ID,ADD_TYPE_DIET,CREATE_RECIPE,UPWARD_OR_FALLING,UPWARD_OR_FALLING_TITLE,FILTER_FOR_STORAGE, FILTER_FOR_DIET,FILTER_HEALTH_SCORE,PAGINATED_ALL,LOADING_PAGE} from './action'
 import  { sumaUnicode } from './fun-sum-unicode'// Función para calcular el valor numerico del Id de los datos de la BD
 
 const initialState={
@@ -11,9 +11,7 @@ const initialState={
     recipeDetail:{},
     typesDiets:[],
     createRecipe:[],
-    paginaActual:1,
-    recipeForPage:10,//cantidad de cards por pagina(puede cambiar)
-    reset:[]
+    loading:true
 
 }
 
@@ -28,7 +26,8 @@ const reducer=(state=initialState,action)=>{
                 recipeFilterAll:action.payload,
                 recipeFilterDiets:action.payload,
                 recipeFilterHealthScore:action.payload,
-                reset:action.payload
+                loading:false
+
                 }
 
         case GET_RECIPE_NAME:
@@ -38,18 +37,21 @@ const reducer=(state=initialState,action)=>{
                 recipeFilterAll:action.payload,
                 recipeFilterDiets:action.payload,
                 recipeFilterHealthScore:action.payload,
+                loading:false
                 }
 
         //-------------------   RECETA POR ID (DETAIL)   -------------------// 
         case RECIPE_ID:
             return {...state,
-                recipeDetail:action.payload
+                recipeDetail:action.payload,
+                loading:false
             }
 
         //-------------------   LIMPIAR EL DETAIL   -------------------// 
         case RESET_RECIPE_ID:
             return {...state,
                 recipeDetail:{}
+                
             }
 
         //-------------------   AGREGAR TIPOS DE DIETAS   -------------------// 
@@ -189,24 +191,11 @@ const reducer=(state=initialState,action)=>{
                  else return
                 }
 
-        //-------------------   PAGINADO   -------------------// 
-        case PAGINATED_ALL:
+        //-------------------   LOADING   -------------------//
+        case LOADING_PAGE:
             return {...state,
-            paginaActual:action.payload
-        }
-        
-
-        //-------------------   RESET   -------------------//      
-        case RESET:
-                return{...state,
-                    recipe:[...state.reset],
-                    recipeFilter:[...state.reset],
-                    recipeFilterDiets:[...state.reset],
-                    recipeFilterHealthScore:[...state.reset],
-                    recipeName:[...state.reset],
-              
-
-                }
+                loading:action.payload
+            }
 
         default:
             return {...state}

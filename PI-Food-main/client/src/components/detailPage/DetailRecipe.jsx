@@ -5,12 +5,16 @@ import { recipeId, resetRecipeId } from "../../redux/action";
 import { useNavigate } from 'react-router-dom'
 import './detail.css'
 import logo from '../../image/logo-detail.jpg'
+import Loading from '../loading/Loading';
 
 
 const DetailRecipe =()=>{
     const navigate = useNavigate()
     const {id}=useParams()
     const dispatch = useDispatch()
+
+
+    const loading=useSelector(state=>state.loading)
     
     //-----------   cargamos el detail   -----------//
     useEffect(()=>{
@@ -26,6 +30,7 @@ const DetailRecipe =()=>{
     return(
 
             <div  className="conteiner-detailRecipe">
+                {loading && <Loading/>} 
                 <section className="section1-detail">
                     <img id="logo" src={logo} alt="logo"/>
 

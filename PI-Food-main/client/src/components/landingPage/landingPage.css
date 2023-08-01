@@ -39,7 +39,7 @@
     width: 300px;
     height: 100px;
     background: transparent;
-    border: 2px solid rgba(35, 38, 39, 0.5);
+    border: 2px solid rgba(249, 250, 251, 0.5);
     border-radius: 20px;
 
     justify-content: center;
@@ -48,6 +48,7 @@
     backdrop-filter: blur(15px);
     transition: 0.5s;
     font-family: cursive;
+    color: white;
 }
 
 #btn-home:hover{
