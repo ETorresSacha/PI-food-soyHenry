@@ -93,10 +93,11 @@ const HomePage = ()=>{
     //-------------------   RESET   -------------------// 
     const resetAllRecipe =()=>{
         dispatch(getRecipeAll())
+        // para volver a la pagina principal
+        setPage(1) 
+        setIndex(0)
 
     }
-    
-
 
     return(
         <div className="conteiner-homePage">
