@@ -12,7 +12,7 @@ const {apiKey} = process.env;
 
     const tiposDieta =[]
 
-    const dieta = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=100`)
+    const dieta = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&addRecipeInformation=true&number=10`)
     const valor =dieta.data.results
 
     // **********************************    DIETAS SUELTAS    **********************************
