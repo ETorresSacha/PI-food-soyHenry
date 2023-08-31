@@ -4,7 +4,6 @@ import './paginado.css'
 
 
 function Paginado({numberOfRecets,page,recipeForPage,setPage, index, setIndex}) {
-    //setPage(1)
 
     const pageNumber=[]
     for(let i=1;i<=Math.ceil(numberOfRecets/recipeForPage);i++){

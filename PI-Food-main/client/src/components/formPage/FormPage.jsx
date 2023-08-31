@@ -70,7 +70,6 @@ const FormPage = ()=>{
        setInput({...input,[event.target.name]:event.target.value})
         setError(validation({...input,[event.target.name]:event.target.value}))
     }
-    console.log(input)
 
 
     //----------- Función de validacón -----------//
